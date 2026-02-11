@@ -1,0 +1,595 @@
+/* ============================================================
+ *  Zeppelin Computing — Global Stylesheet
+ *  ============================================================
+ *  Color palette:
+ *    --bg-primary    : Deep navy          (#0a0f1a)
+ *    --bg-secondary  : Slightly lighter    (#111827)
+ *    --bg-card       : Card surfaces       (#1a2236)
+ *    --accent        : Electric blue        (#3b82f6)
+ *    --accent-hover  : Brighter blue        (#60a5fa)
+ *    --text-primary  : Near-white           (#e5e7eb)
+ *    --text-secondary: Muted gray           (#9ca3af)
+ *    --border        : Subtle border        (#1f2937)
+ *
+ *  Typography:
+ *    Headings : "DM Sans" — geometric, modern, highly readable
+ *    Body     : "IBM Plex Sans" — technical heritage, clean reading
+ *  ============================================================ */
+
+/* --- CSS Custom Properties (edit these to re-theme the whole site) --- */
+:root {
+  --bg-primary: #0a0f1a;
+  --bg-secondary: #111827;
+  --bg-card: #1a2236;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --border: #1f2937;
+  --max-width: 1100px;
+  --radius: 8px;
+  --transition: 0.25s ease;
+}
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: "IBM Plex Sans", sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4 {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+h1 { font-size: 2.75rem; }
+h2 { font-size: 2rem; margin-bottom: 1rem; }
+h3 { font-size: 1.35rem; margin-bottom: 0.5rem; }
+
+p {
+  color: var(--text-secondary);
+  max-width: 65ch; /* keeps paragraphs comfortable to read */
+}
+
+/* --- Layout Utility --- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section {
+  padding: 5rem 0;
+}
+
+/* ============================================================
+ *  HEADER / NAVIGATION
+ *  ============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(10, 15, 26, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  /*
+   *   This creates a clipping region that extends far below the header.
+   *   The mobile nav menu (z-index: 90) is positioned behind this header
+   *   (z-index: 100), so as it slides down from behind the header bar,
+   *   it only becomes visible once it clears the bottom edge.
+   *
+   *   The 9999px bottom value just means "extend clipping far enough
+   *   to never cut off the menu once it's fully open."
+   */
+  clip-path: inset(0 0 -9999px 0);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+}
+
+/* --- Logo --- */
+.logo {
+  font-family: "DM Sans", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo .accent {
+  color: var(--accent);
+}
+
+/* --- Desktop Navigation --- */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: color var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #ffffff;
+}
+
+/* --- Hamburger Button (hidden on desktop) --- */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-primary);
+  margin: 5px 0;
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* --- Mobile Navigation --- */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    /*
+     *     On mobile the nav is positioned directly below the header
+     *     and clips behind it using overflow on the body/header.
+     *
+     *     We start with NO transition — this prevents the brief
+     *     "closing" flash on page load. The .nav-ready class is
+     *     added by main.js after a short delay, which enables the
+     *     smooth slide animation only AFTER the page has settled.
+     *
+     *     visibility: hidden ensures screen readers and keyboard
+     *     navigation can't reach it while it's closed.
+     */
+    position: fixed;
+    top: 4rem;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    flex-direction: column;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem;
+    gap: 1rem;
+    transform: translateY(-200%);
+    visibility: hidden;
+    /* No transition by default — prevents flash on load */
+  }
+
+  /* Transition is only enabled after JS adds this class */
+  .nav-links.nav-ready {
+    transition: transform 0.3s ease, visibility 0.3s ease;
+  }
+
+  .nav-links.open {
+    transform: translateY(0);
+    visibility: visible;
+  }
+}
+
+/* ============================================================
+ *  HERO SECTION  (index.html)
+ *  ============================================================ */
+.hero {
+  padding: 8rem 0 6rem;
+  text-align: center;
+  position: relative;
+}
+
+/*
+ * Subtle grid-dot background texture.
+ * Created with a tiny radial-gradient — no image files needed.
+ */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(59,130,246,0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.hero h1 {
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.hero p {
+  font-size: 1.15rem;
+  max-width: 540px;
+  margin: 0 auto 2.5rem;
+}
+
+/* --- Call-to-action buttons --- */
+.cta-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius);
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all var(--transition);
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  color: #ffffff;
+}
+
+.btn-outline {
+  border: 1.5px solid var(--border);
+  color: var(--text-primary);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ============================================================
+ *  CARD GRID  (used on index for service previews, etc.)
+ *  ============================================================ */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.card-icon {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.card p {
+  font-size: 0.95rem;
+}
+
+/* ============================================================
+ *  PAGE-SPECIFIC CONTENT SECTIONS
+ *  ============================================================ */
+.page-intro {
+  padding: 5rem 0 3rem;
+  text-align: center;
+}
+
+.page-intro p {
+  margin: 0.75rem auto 0;
+  max-width: 560px;
+  font-size: 1.05rem;
+}
+
+/* --- About page: simple two-column layout --- */
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .about-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Contact Info Block --- */
+.contact-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.contact-block p {
+  margin-bottom: 1rem;
+}
+
+.contact-block .email-link {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* ============================================================
+ *  FOOTER
+ *  ============================================================ */
+.site-footer {
+  margin-top: auto; /* pushes footer to bottom of the viewport */
+  border-top: 1px solid var(--border);
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.site-footer p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0 auto;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+}
+
+/* ============================================================
+ *  BLOG LISTING  (blog/index.html)
+ *  ============================================================ */
+.blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/*
+ * Blog cards are styled as full-width clickable blocks.
+ * The entire <a> tag is the card, so the whole thing is clickable.
+ */
+.blog-card {
+  display: block;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem 2rem;
+  text-decoration: none;
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.blog-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.blog-card-date {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.03em;
+}
+
+.blog-card h3 {
+  color: #ffffff;
+  margin-bottom: 0.4rem;
+}
+
+.blog-card p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.blog-card-read {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* ============================================================
+ *  BLOG POST  (blog/posts/*.html)
+ *  ============================================================ */
+ .blog-post {
+   max-width: 720px;
+   margin: 0 auto;
+ }
+
+ .blog-back-link {
+   display: inline-block;
+   font-size: 0.85rem;
+   color: var(--text-secondary);
+   margin-bottom: 1.5rem;
+   transition: color var(--transition);
+ }
+
+ .blog-back-link:hover {
+   color: var(--accent);
+ }
+
+ .blog-post-date {
+   display: block;
+   font-size: 0.85rem;
+   color: var(--text-secondary);
+   margin-bottom: 0.5rem;
+   letter-spacing: 0.03em;
+ }
+
+ .blog-post h1 {
+   font-size: 2.25rem;
+   margin-bottom: 2rem;
+ }
+
+ /* Paragraphs and headings within blog post body */
+ .blog-post p {
+   margin-bottom: 1.25rem;
+   max-width: none; /* override the global 65ch cap inside posts */
+ }
+
+ .blog-post h2 {
+   margin-top: 2.5rem;
+   margin-bottom: 0.75rem;
+ }
+
+ .blog-post h3 {
+   margin-top: 2rem;
+   margin-bottom: 0.5rem;
+ }
+
+ /* Inline code */
+ .blog-post code {
+   background: rgba(59, 130, 246, 0.1);
+   color: var(--accent-hover);
+   padding: 0.15em 0.4em;
+   border-radius: 4px;
+   font-size: 0.9em;
+ }
+
+ /* Code blocks */
+ .blog-post pre {
+   background: var(--bg-secondary);
+   border: 1px solid var(--border);
+   border-radius: var(--radius);
+   padding: 1.25rem;
+   overflow-x: auto;
+   margin-bottom: 1.5rem;
+ }
+
+ .blog-post pre code {
+   background: none;
+   padding: 0;
+   font-size: 0.85rem;
+   color: var(--text-primary);
+ }
+
+ /* Block quotes */
+ .blog-post blockquote {
+   border-left: 3px solid var(--accent);
+   padding-left: 1.25rem;
+   margin: 1.5rem 0;
+   color: var(--text-secondary);
+   font-style: italic;
+ }
+
+ /* Lists inside blog posts */
+ .blog-post ul,
+.blog-post ol {
+  margin: 1rem 0 1.5rem 1.25rem;
+  color: var(--text-secondary);
+}
+
+.blog-post li {
+  margin-bottom: 0.4rem;
+}
+
+@media (max-width: 768px) {
+  .blog-post h1 { font-size: 1.75rem; }
+}
+
+/* ============================================================
+ *  FADE-IN ANIMATION
+ *  Elements with class "fade-in" will gently appear on load.
+ *  Applied via a tiny Intersection Observer in main.js.
+ *  ============================================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+ *  RESPONSIVE FINE-TUNING
+ *  ============================================================ */
+@media (max-width: 768px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  .hero { padding: 5rem 0 4rem; }
+  .section { padding: 3.5rem 0; }
+}

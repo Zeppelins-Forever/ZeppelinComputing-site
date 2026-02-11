@@ -1,0 +1,39 @@
+In case I forget, to add a blogpost, I must do the following:
+
+1)
+Place a blog entry in the "posts" folder whose name is the date in YYYY-MM-DD.html format.
+I.E. "2026-02-30.html". Use the template to make sure you format properly.
+
+2)
+Add the entry to posts.json. Make sure the date and filename match EXACTLY (barring the .html extension).
+Remember, the last entry should NOT have a comma at the end!
+The entry should look something like:
+
+  {
+    "date": "2025-02-30",
+    "title": "Welcome to the Zeppelin Computing Blog",
+    "summary": "Our first post — a quick introduction to who we are and what we'll be writing about here."
+  },
+
+
+For reference, here's a "complete" version of the file:
+
+[
+  {
+    "date": "2025-02-10",
+    "title": "Welcome to the Zeppelin Computing Blog",
+    "summary": "Our first post — a quick introduction to who we are and what we'll be writing about here."
+  },
+  {
+    "date": "2025-02-05",
+    "title": "Example Post: Why Backups Matter",
+    "summary": "A placeholder post demonstrating the blog template. Replace or delete this entry."
+  },
+  {
+    "date": "2026-02-10",
+    "title": "Test JSON blog entry",
+    "summary": "This is an even placeholder-er placeholder!"
+  }
+]
+
+

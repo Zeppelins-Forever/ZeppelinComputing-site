@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Zeppelin Computing</title>
+  <link rel="icon" href="../assets/Zeppelin Computing logo - filled.svg" type="image/svg+xml">
+  <meta name="description" content="Thoughts and insights from Zeppelin Computing on IT, security, and technology." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">
+        <img src="../assets/Zeppelin Computing logo - transparent.svg" width="50" height="50"> Zeppelin Computing <span class="accent">&#9670;</span>
+      </a>
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../services/index.html">Services</a></li>
+          <li><a href="../about/index.html">About</a></li>
+          <li><a href="../blog/index.html" class="active">Blog</a></li>
+          <li><a href="../contact/index.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== PAGE INTRO ========== -->
+  <section class="page-intro">
+    <div class="container">
+      <h1 class="fade-in">Blog</h1>
+      <p class="fade-in">
+        Notes, write-ups, and insights from our work in IT consulting.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== BLOG POST LISTING ========== -->
+  <section class="section">
+    <div class="container">
+
+      <!--
+        This <div> starts empty. The script below reads posts.json,
+        sorts entries newest-first, and injects a list of linked
+        cards here. If JavaScript is disabled or something fails,
+        the <noscript> fallback is shown instead.
+      -->
+      <div id="blog-list" class="blog-list"></div>
+
+      <noscript>
+        <p style="text-align:center; color: var(--text-secondary);">
+          Please enable JavaScript to view the blog listing, or
+          browse the <a href="posts/">posts/</a> folder directly.
+        </p>
+      </noscript>
+
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <ul class="footer-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../services/index.html">Services</a></li>
+        <li><a href="../about/index.html">About</a></li>
+        <li><a href="../blog/index.html">Blog</a></li>
+        <li><a href="../contact/index.html">Contact</a></li>
+      </ul>
+      <p>&copy; 2026 Zeppelin Computing. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Shared site JS (menu toggle + fade-in) -->
+  <script src="../js/main.js"></script>
+
+  <!--
+    ============================================================
+    BLOG LISTING SCRIPT
+    ============================================================
+    How this works:
+
+    1. It fetches "posts.json" (a small file YOU maintain — see below).
+    2. It sorts the entries by date, newest first.
+    3. For each entry it creates an HTML card with a link to the post.
+    4. It inserts those cards into the #blog-list container.
+
+    To add a new blog post, you do TWO things:
+      a) Create a new HTML file in the posts/ folder (e.g. 2025-07-15.html)
+      b) Add one line to posts.json with the date, title, and summary.
+
+    That's it — the listing page handles the rest automatically.
+    ============================================================
+  -->
+  <script>
+    (function () {
+      "use strict";
+
+      /*
+        fetch() requests the posts.json file from the server.
+        .then() chains handle the response in two steps:
+          1. Parse the raw response as JSON.
+          2. Process the resulting array of post objects.
+        .catch() handles any errors (file missing, bad JSON, etc.).
+      */
+      fetch("posts.json")
+        .then(function (response) {
+          /*
+            response.ok is true if the HTTP status is 200-299.
+            If posts.json doesn't exist or can't be loaded, we
+            throw an error so the .catch() block can handle it.
+          */
+          if (!response.ok) {
+            throw new Error("Could not load posts.json (HTTP " + response.status + ")");
+          }
+          return response.json();
+        })
+        .then(function (posts) {
+          var container = document.getElementById("blog-list");
+
+          /* If the JSON file is empty or has no entries, show a message */
+          if (!posts || posts.length === 0) {
+            container.innerHTML =
+              '<p style="text-align:center; color: var(--text-secondary);">' +
+              "No posts yet — check back soon!</p>";
+            return;
+          }
+
+          /*
+            Sort posts by date, newest first.
+            Because dates are formatted as YYYY-MM-DD, a simple
+            string comparison (localeCompare) sorts them correctly
+            in chronological order. We reverse with "b compared to a"
+            to get newest-first (descending) order.
+          */
+          posts.sort(function (a, b) {
+            return b.date.localeCompare(a.date);
+          });
+
+          /*
+            Build the HTML for each post card.
+            Each post object in posts.json has three fields:
+              - date:    "YYYY-MM-DD"   (used for sorting + display)
+              - title:   "Post Title"   (the heading shown on the card)
+              - summary: "Short blurb"  (a sentence or two of preview)
+
+            The link points to posts/YYYY-MM-DD.html — matching the
+            filename convention for your blog post files.
+          */
+          var html = "";
+
+          posts.forEach(function (post) {
+            /*
+              Format the date for display.
+              We split "2025-07-15" into parts and build a readable
+              date string using toLocaleDateString(). The {timeZone: "UTC"}
+              option prevents off-by-one-day issues caused by timezone
+              offsets when parsing date-only strings.
+            */
+            var dateObj = new Date(post.date + "T00:00:00Z");
+            var displayDate = dateObj.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              timeZone: "UTC",
+            });
+
+            html +=
+              '<a href="posts/' + post.date + '.html" class="blog-card fade-in">' +
+              '<time class="blog-card-date">' + displayDate + "</time>" +
+              "<h3>" + post.title + "</h3>" +
+              "<p>" + post.summary + "</p>" +
+              '<span class="blog-card-read">Read more &rarr;</span>' +
+              "</a>";
+          });
+
+          container.innerHTML = html;
+
+          /*
+            Re-trigger the fade-in observer from main.js.
+            The blog cards were injected AFTER the page loaded, so the
+            original IntersectionObserver in main.js didn't see them.
+            We create a new observer here using the same logic to
+            animate these dynamically-added cards.
+          */
+          var newFadeEls = container.querySelectorAll(".fade-in");
+          if (newFadeEls.length > 0) {
+            var observer = new IntersectionObserver(
+              function (entries) {
+                entries.forEach(function (entry) {
+                  if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                  }
+                });
+              },
+              { threshold: 0.15 }
+            );
+            newFadeEls.forEach(function (el) {
+              observer.observe(el);
+            });
+          }
+        })
+        .catch(function (error) {
+          /*
+            If anything goes wrong (missing file, bad JSON, network
+            error), show a friendly message instead of a blank page.
+          */
+          console.error("Blog listing error:", error);
+          var container = document.getElementById("blog-list");
+          container.innerHTML =
+            '<p style="text-align:center; color: var(--text-secondary);">' +
+            "Unable to load blog posts. Please try again later.</p>";
+        });
+    })();
+  </script>
+
+</body>
+</html>

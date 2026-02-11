@@ -1,20 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Zeppelin Computing</title>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
-  </head>
-  <body>
-    <main>
-      <h1>Zeppelin Computing test site.</h1>
-      <p>Welcome to zeppelin.computer! Currently this site is still under construction.</p>
-      <p>You can view the in-progress, educational section of the site at <a href="https://info.zeppelin.computer">info.zeppelin.computer</a>.</p>
-      <p>You can contact me at <a href="mailto:info@zeppelin.computer">info@zeppelin.computer</a></p>
-    </main>
-    <script src="index.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zeppelin Computing — IT Consulting</title>
+  <link rel="icon" href="assets/Zeppelin Computing logo - filled.svg" type="image/svg+xml">
+  <meta name="description" content="Zeppelin Computing offers professional IT consulting services tailored to your business needs." />
+
+  <!-- Google Fonts: DM Sans (headings) + IBM Plex Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ========== HEADER / NAV ========== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <img src="assets/Zeppelin Computing logo - transparent.svg" width="50" height="50"> Zeppelin Computing <span class="accent">&#9670;</span>
+      </a>
+
+      <!-- Hamburger button (mobile only, toggled via main.js) -->
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="services/index.html">Services</a></li>
+          <li><a href="about/index.html">About</a></li>
+          <li><a href="blog/index.html">Blog</a></li>
+          <li><a href="contact/index.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="fade-in">Technology solutions<br />built for your business.</h1>
+      <p class="fade-in">
+        Zeppelin Computing provides IT consulting to help
+        small businesses operate more efficiently, more securely, and
+        with confidence.
+        <br><br>
+        And most importantly, we try our best to Keep It Simple!
+      </p>
+      <div class="cta-group fade-in">
+        <a href="services/index.html" class="btn btn-primary">Our Services</a>
+        <a href="contact/index.html" class="btn btn-outline">Get in Touch</a>
+      </div>
+      <br>
+      <div class="cta-group fade-in">
+        <a href="https://info.zeppelin.computer" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Informational Resources</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES PREVIEW ========== -->
+  <section class="section">
+    <div class="container">
+      <h2 class="fade-in" style="text-align:center; margin-bottom:2.5rem;">What We Do</h2>
+
+      <div class="card-grid">
+        <div class="card fade-in">
+          <div class="card-icon">⚙️</div>
+          <h3>Infrastructure &amp; Development</h3>
+          <p>Develop custom solutions to meet <i>your</i> needs.</p>
+        </div>
+
+        <div class="card fade-in">
+          <div class="card-icon">🔒</div>
+          <h3>Security Awareness</h3>
+          <p>Understand where your security may be falling short of industry standards, and how to fix it.</p>
+        </div>
+
+        <div class="card fade-in">
+          <div class="card-icon">🌐</div>
+          <h3>Cloud &amp; Networking</h3>
+          <p>Understand how your organization can leverage cloud services - or how to run them yourself!</p>
+        </div>
+      </div>
+
+      <p class="fade-in" style="text-align:center; margin:2.5rem auto 0;">
+        <a href="services/index.html">View all services &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== CTA BANNER ========== -->
+  <section class="section" style="background-color: var(--bg-secondary);">
+    <div class="container fade-in" style="text-align:center;">
+      <h2>Ready to get started?</h2>
+      <p style="margin:0.75rem auto 2rem;">
+        Reach out and let's discuss how Zeppelin Computing can support your goals.
+      </p>
+      <a href="contact/index.html" class="btn btn-primary">Contact Us</a>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services/index.html">Services</a></li>
+        <li><a href="about/index.html">About</a></li>
+        <li><a href="blog/index.html">Blog</a></li>
+        <li><a href="contact/index.html">Contact</a></li>
+      </ul>
+      <p>&copy; 2026 Zeppelin Computing. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
 </html>
