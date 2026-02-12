@@ -1,0 +1,11 @@
+# Ignore anything in OtherResources by default
+/OtherResources/
+
+# Except nginx.conf from being ignored.
+!/OtherResources/default.conf
+
+Dockerfile
+_config.yml
+.dockerignore
+README.md
+404.html

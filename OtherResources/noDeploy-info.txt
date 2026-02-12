@@ -1,0 +1,5 @@
+By default, Jekyll (used by GitHub pages) does not deploy directories or files starting with an underscore, nor their contents.
+
+Or, add them to ../_config.yml under the "exclude" tag.
+
+This folder has been added to _config.yaml, and thus is safe from being deployed by Jekyll. However, this may still be used by Docker.
