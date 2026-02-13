@@ -61,7 +61,7 @@
       <noscript>
         <p style="text-align:center; color: var(--text-secondary);">
           Please enable JavaScript to view the blog listing, or
-          browse the <a href="/posts/">posts/</a> folder directly.
+          browse the <a href="/blog/posts/">posts/</a> folder directly.
         </p>
       </noscript>
 
@@ -97,7 +97,7 @@
     4. It inserts those cards into the #blog-list container.
 
     To add a new blog post, you do TWO things:
-      a) Create a new HTML file in the posts/ folder (e.g. 2025-07-15.html)
+      a) Create a new HTML file in the /blog/posts/ folder (e.g. 2025-07-15.html)
       b) Add one line to posts.json with the date, title, and summary.
 
     That's it — the listing page handles the rest automatically.
@@ -155,7 +155,7 @@
               - title:   "Post Title"   (the heading shown on the card)
               - summary: "Short blurb"  (a sentence or two of preview)
 
-            The link points to posts/YYYY-MM-DD.html — matching the
+            The link points to /blog/posts/YYYY-MM-DD.html — matching the
             filename convention for your blog post files.
           */
           var html = "";
@@ -177,7 +177,7 @@
             });
 
             html +=
-              '<a href="/posts/' + post.date + '.html" class="blog-card fade-in">' +
+              '<a href="/blog/posts/' + post.date + '.html" class="blog-card fade-in">' +
               '<time class="blog-card-date">' + displayDate + "</time>" +
               "<h3>" + post.title + "</h3>" +
               "<p>" + post.summary + "</p>" +
