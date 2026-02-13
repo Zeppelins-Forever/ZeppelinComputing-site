@@ -1,61 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- ✏️  EDIT: Change the <title> to match your post title -->
-  <title>POST TITLE HERE — Zeppelin Computing</title>
-  <link rel="icon" href="/assets/Zeppelin Computing logo - filled.svg" type="image/svg+xml">
-  <meta name="description" content="A brief description of this post for search engines." />
+        <!-- ✏️  EDIT: Change the <title> to match your post title -->
+        <title>POST TITLE HERE — Zeppelin Computing</title>
+        <link
+            rel="icon"
+            href="/assets/Zeppelin Computing logo - filled.svg"
+            type="image/svg+xml"
+        />
+        <meta
+            name="description"
+            content="A brief description of this post for search engines."
+        />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
 
-  <!--
+        <!--
     Paths go up TWO directories because this file lives in
     blog/posts/YYYY-MM-DD.html  →  /css/style.css
   -->
-  <link rel="stylesheet" href="/css/style.css" />
-</head>
-<body>
+        <link rel="stylesheet" href="/css/style.css" />
+    </head>
+    <body>
+        <!-- ========== HEADER ========== -->
+        <header class="site-header">
+            <div class="container header-inner">
+                <a href="/" class="logo">
+                    <img
+                        src="/assets/Zeppelin Computing logo - transparent.svg"
+                        width="50"
+                        height="50"
+                    />
+                    Zeppelin Computing <span class="accent">&#9670;</span>
+                </a>
+                <button class="menu-toggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+                </button>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/services/">Services</a></li>
+                        <li><a href="/about/">About</a></li>
+                        <li><a href="/blog/" class="active">Blog</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
 
-  <!-- ========== HEADER ========== -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="/" class="logo">
-        <img src="/assets/Zeppelin Computing logo - transparent.svg" width="50" height="50"> Zeppelin Computing <span class="accent">&#9670;</span>
-      </a>
-      <button class="menu-toggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="/">Home</a></li>
-          <li><a href="/services/">Services</a></li>
-          <li><a href="/about/">About</a></li>
-          <li><a href="/blog/" class="active">Blog</a></li>
-          <li><a href="/contact/">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+        <!-- ========== BLOG POST CONTENT ========== -->
+        <article class="section">
+            <div class="container">
+                <div class="blog-post fade-in">
+                    <!-- ✏️  EDIT: Set the post date here (displayed to the reader) -->
+                    <a href="/blog/" class="blog-back-link">&larr; All Posts</a>
+                    <time class="blog-post-date">February 10, 2026</time>
 
-  <!-- ========== BLOG POST CONTENT ========== -->
-  <article class="section">
-    <div class="container">
+                    <!-- ✏️  EDIT: Your post title -->
+                    <h1>Welcome to the Zeppelin Computing Blog</h1>
 
-      <div class="blog-post fade-in">
-
-        <!-- ✏️  EDIT: Set the post date here (displayed to the reader) -->
-        <a href="/" class="blog-back-link">&larr; All Posts</a>
-        <time class="blog-post-date">February 10, 2026</time>
-
-        <!-- ✏️  EDIT: Your post title -->
-        <h1>Welcome to the Zeppelin Computing Blog</h1>
-
-        <!-- ✏️  EDIT: Write your post content below.
+                    <!-- ✏️  EDIT: Write your post content below.
              Use standard HTML tags:
                <p>           — paragraphs
                <h2>, <h3>    — sub-headings within the post
@@ -68,47 +80,46 @@
                                blog/images/ folder if you like)
         -->
 
-        <p>
-          This is a sample blog post. Replace this content with your own
-          writing. The template gives you a clean, readable layout that
-          matches the rest of the Zeppelin Computing site.
-        </p>
+                    <p>
+                        This is a sample blog post. Replace this content with
+                        your own writing. The template gives you a clean,
+                        readable layout that matches the rest of the Zeppelin
+                        Computing site.
+                    </p>
 
-        <h2>A Sub-Heading</h2>
+                    <h2>A Sub-Heading</h2>
 
-        <p>
-          You can use any standard HTML here. Keep paragraphs focused and
-          readable. The stylesheet constrains line width automatically for
-          comfortable reading.
-        </p>
+                    <p>
+                        You can use any standard HTML here. Keep paragraphs
+                        focused and readable. The stylesheet constrains line
+                        width automatically for comfortable reading.
+                    </p>
 
-        <p>
-          When you're done writing, remember to also add a corresponding
-          entry in <code>blog/posts.json</code> so the post appears on
-          the blog listing page.
-        </p>
+                    <p>
+                        When you're done writing, remember to also add a
+                        corresponding entry in <code>blog/posts.json</code> so
+                        the post appears on the blog listing page.
+                    </p>
 
-        <!-- ✏️  END OF POST CONTENT -->
+                    <!-- ✏️  END OF POST CONTENT -->
+                </div>
+            </div>
+        </article>
 
-      </div>
+        <!-- ========== FOOTER ========== -->
+        <footer class="site-footer">
+            <div class="container">
+                <ul class="footer-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/services/">Services</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+                <p>&copy; 2026 Zeppelin Computing. All rights reserved.</p>
+            </div>
+        </footer>
 
-    </div>
-  </article>
-
-  <!-- ========== FOOTER ========== -->
-  <footer class="site-footer">
-    <div class="container">
-      <ul class="footer-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/services/">Services</a></li>
-        <li><a href="/about/">About</a></li>
-        <li><a href="/blog/">Blog</a></li>
-        <li><a href="/contact/">Contact</a></li>
-      </ul>
-      <p>&copy; 2026 Zeppelin Computing. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="/js/main.js"></script>
-</body>
+        <script src="/js/main.js"></script>
+    </body>
 </html>
